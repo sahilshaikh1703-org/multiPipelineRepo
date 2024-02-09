@@ -1,0 +1,35 @@
+pipeline{
+    
+    tools{
+        maven 'MVN_HOME'
+    }
+
+    agent any
+    
+   stages{
+       stage('Clone a Repo'){
+           steps{
+               git 'https://github.com/sahilshaikh1703-org/multiPipelineRepo.git'
+           }
+       }
+       
+       stage('Compile the code'){
+           steps{
+              bat 'mvn compile'
+           }
+       }
+       
+       
+       stage('Unit Test'){
+           steps{
+              bat 'mvn test'
+           }
+       }
+       
+       stage('Package'){
+           steps{
+             bat  'mvn clean install package'
+           }
+       }
+       }
+}
